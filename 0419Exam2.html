@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>animation</title>
+        <style>
+            #canvas{
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id='canvas' width=300 height=300 ></canvas>
+        <script >
+
+            const ctx =  document.getElementById('canvas').getContext('2d');// canvas 2d 가지고 오기
+            var x =  Math.random()*canvas.width;// x 위치 랜덤하게 만들기
+            var y = 0;
+                      
+            const drawText = () => {
+                // 단어 출력하기
+                ctx.font = '48px serif';
+                ctx.fillText('Hi', x, y);
+
+            };
+            
+            const update = () => {
+                ctx.clearRect(0,0, canvas.width, canvas.height);
+                if(y >= 300){
+                    y = 0;
+                    x = Math.random()*canvas.width;
+                }
+                drawText();
+            
+              // Change y position
+              y += 5;
+            
+            };
+            
+            setInterval( update, 30);
+        </script>
+    </body>
+</html>

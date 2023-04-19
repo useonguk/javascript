@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>animation</title>
+    </head>
+    <body>
+        <!-- // canvas  id=canvas, 높이 너비 300  -->
+        <canvas id="canvas" height=300 width=300 style="border: 1px solid black;">
+
+        </canvas>
+        <script >
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext('2d');// canvas 2d 가지고 오기
+            
+            const circle = {
+              x: 200,
+              y: 200,
+              size: 30,
+              dx: 5,
+              dy: 4,
+            };
+            
+            const drawCircle = () => {
+              // 원 그리기
+                ctx.beginPath();
+                console.log(circle.x)
+                console.log(circle.y)
+                ctx.arc(circle.x, circle.y, 30, 0, Math.PI*2 );
+                ctx.fillStyle = "red";
+                ctx.fill();
+            };
+            
+            const update = () => {
+              // (*) Clear canvas
+              ctx.clearRect(0, 0, 300, 300);
+              drawCircle();
+            
+              // Change position
+              circle.x += circle.dx;
+              circle.y += circle.dy;
+            
+              // Detect side walls
+              if (circle.x >= 250 || circle.x <= 0) {
+                circle.dx *= -1;
+              }
+            
+              // Detect top and bottom walls
+              if (circle.y >= 250 || circle.y <= 0) {    
+                circle.dy *= -1;
+              }
+            
+              // Repaint canvas
+              requestAnimationFrame(update); // (*)
+            };
+            
+            update();
+        </script>
+    </body>
+</html>
